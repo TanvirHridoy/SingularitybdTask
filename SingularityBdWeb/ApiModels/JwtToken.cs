@@ -33,7 +33,7 @@ namespace SingularitybdWeb.ApiModels
         {
             
                 HttpClient httpClient = new HttpClient();
-                httpClient.BaseAddress = new Uri("http://localhost:17250/api/");
+            httpClient.BaseAddress = MyToken.BaseUrl;
                 
                 var res = await httpClient.PostAsJsonAsync<JwtTokenViewModel>("account", new JwtTokenViewModel { UserName = Username, Password = password });
                 res.EnsureSuccessStatusCode();
@@ -49,7 +49,7 @@ namespace SingularitybdWeb.ApiModels
         public static async Task<JwtToken> RefreshToken(ClaimsPrincipal claim)
         {
             HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localhost:17250/api/");
+            httpClient.BaseAddress = MyToken.BaseUrl;
             var res = await httpClient.PostAsJsonAsync<string>("account/"+claim.Identity.Name,"");
             res.EnsureSuccessStatusCode();
             if (res.IsSuccessStatusCode)
