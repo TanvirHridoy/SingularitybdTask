@@ -1,0 +1,88 @@
+﻿@model SingularitybdWeb.Models.MenuViewModel
+ 
+@{
+    ViewData["Title"] = "ViewMenu";
+}
+
+<h1>ViewMenu</h1>
+
+<h3>@Model.Status</h3>
+<p>
+    <a asp-action="AddMenu">Create New</a>
+</p>
+<div class="container-fluid ">
+    <table class="tabletable-striped" >
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    ParentNavigationMenu
+                </th>
+                <th>
+                    Area
+                </th>
+                <th>
+                    ControllerName
+                </th>
+                <th>
+                    ActionName
+                </th>
+                <th>
+                    IsExternal
+                </th>
+                <th>
+                    ExternalUrl
+                </th>
+                <th>
+                    DisplayOrder
+                </th>
+                <th>
+                    Visible
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.menus)
+            {
+                <tr>
+                    <td>
+                         @item.Name
+                    </td>
+                    <td>
+                        @item.ParentMenuId
+                    </td>
+                    <td>
+                        @item.Area
+                    </td>
+                    <td>
+                       @item.ControllerName
+                    </td>
+                    <td>
+                        @item.ActionName
+                    </td>
+                    <td>
+                        @(item.IsExternal==true?"External":"Internal")
+                    </td>
+                    <td>
+                        @item.ExternalUrl
+                    </td>
+                    <td>
+                        @item.DisplayOrder
+                    </td>
+                    <td>
+                        @(item.Visible==true?"Visible":"Hidden")
+                    </td>
+                    <td>
+                        <a asp-action="EditMenu" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="DeleteMenu" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

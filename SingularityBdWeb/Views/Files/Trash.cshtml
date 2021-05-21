@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SingularitybdWeb.ApiModels.Files>
+
+@{
+    ViewData["Title"] = "Trash";
+}
+
+<h1>Trash</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeleteDate)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+       
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileUrl)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeleteDate)
+                </td>
+
+                <td>
+                    
+                        <a asp-action="RestoreTrash" asp-route-id="@item.Id">Restore</a> |
+                        <a asp-action="DeleteTrash" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+           
+            }
+</tbody>
+</table>
