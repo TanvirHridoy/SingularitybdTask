@@ -120,6 +120,24 @@ namespace SingularitybdWeb.Controllers
 
             return View(userViewModel);
         }
+        [Authorize("Users")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var viewModel = new UserViewModel();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+
+                await _userManager.RemoveFromRolesAsync(user, userRoles);
+
+                await _userManager.DeleteAsync(user);
+            }
+
+            return RedirectToAction("Users");
+        }
+
 
         [Authorize("Users")]
         public async Task<IActionResult> EditUser(string id)
